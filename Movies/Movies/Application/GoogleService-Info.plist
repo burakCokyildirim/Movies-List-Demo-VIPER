@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>409229871413-r2ebm4vv9pu9imd2323899q60a9f1ccm.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.409229871413-r2ebm4vv9pu9imd2323899q60a9f1ccm</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAX4RGfKiknIYhXby1isGjG15NClnKtAyk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>409229871413</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.burak.Movies</string>
+	<key>PROJECT_ID</key>
+	<string>movies-fda54</string>
+	<key>STORAGE_BUCKET</key>
+	<string>movies-fda54.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:409229871413:ios:e00465f20a08fab778a47c</string>
+	<key>DATABASE_URL</key>
+	<string>https://movies-fda54.firebaseio.com</string>
+</dict>
+</plist>
