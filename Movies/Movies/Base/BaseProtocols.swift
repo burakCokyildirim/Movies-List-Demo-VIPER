@@ -55,8 +55,6 @@ protocol BaseInteractorProtocol: class {
 extension BaseViewControllerProtocol {
     
     func showError(errorModel: ErrorModel, completionHandler: PopupCompletionHandler? = nil) { }
-    func showValidationError(errorMessage: String) { }
-    func showTokenExpireMessage(errorModel: ErrorModel, completionHandler: PopupCompletionHandler? = nil) { }
     func showReachability(errorModel: ErrorModel) { }
     func showSplash() { }
     func reloadTableView() { }
@@ -64,10 +62,6 @@ extension BaseViewControllerProtocol {
     func stopProgress() { }
     func startLoading() { }
     func stopLoading() { }
-    func startLoadingInView() { }
-    func disableNavigationInteraction() {}
-    func activateNavigationInteraction() {}
-    func stopLoadingInView() { }
     func lockUI() { }
     func unlockUI() { }
 }

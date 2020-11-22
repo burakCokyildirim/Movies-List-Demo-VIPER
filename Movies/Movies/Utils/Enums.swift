@@ -13,3 +13,10 @@ enum PopupCloseType {
     case yes
     case no
 }
+
+enum MessageType: String {
+    case typeSomething = "text.type_something"
+    case noResult = "text.no_found"
+    case keepTyping = "text.keep_typing"
+    case done = ""
+}

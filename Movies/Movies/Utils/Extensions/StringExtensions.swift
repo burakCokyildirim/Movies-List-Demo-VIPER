@@ -39,4 +39,12 @@ extension String {
     var turkishUppercased: String {
         return self.uppercased(with: Locale(identifier: "tr_TR"))
     }
+    
+    func capitalizingFirstLetter() -> String {
+      return prefix(1).uppercased() + self.lowercased().dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+      self = self.capitalizingFirstLetter()
+    }
 }

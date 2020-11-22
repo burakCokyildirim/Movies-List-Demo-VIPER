@@ -12,6 +12,8 @@ target 'Movies' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'NVActivityIndicatorView'
   pod 'Firebase/Analytics'
+  pod 'Firebase/RemoteConfig'
+  pod 'SkeletonView'
 
   target 'MoviesTests' do
     inherit! :search_paths

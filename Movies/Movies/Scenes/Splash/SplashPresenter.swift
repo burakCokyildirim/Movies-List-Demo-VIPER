@@ -34,6 +34,12 @@ class SplashPresenter: BasePresenter {
     
     // MARK: - Business Logic
     
+    override func handleAndShowError(errorModel: ErrorModel) {
+        
+        DispatchQueue.main.async {
+            self.viewController.showError(errorModel: errorModel, completionHandler: nil)
+        }
+    }
 }
 
 // MARK: - Extensions
@@ -49,6 +55,7 @@ extension SplashPresenter: SplashPresenterViewProtocol {
     }
     
     func getLaunchText() {
+        viewController.startLoading()
         interactor.fetchLaunchText()
     }
 }
@@ -58,8 +65,23 @@ extension SplashPresenter: SplashPresenterViewProtocol {
 extension SplashPresenter: SplashPresenterInteractorProtocol {
     
     func showNetworkError() {
-        let error = ErrorModel(genericErrorType: .reachability)
-        _ = handleGenericError(errorModel: error)
+        
+        DispatchQueue.main.async {
+            let error = ErrorModel(genericErrorType: .reachability)
+            _ = self.handleGenericError(errorModel: error, viewController: self.viewController)
+        }
+    }
+    
+    func showLaunchText(_ text: String?) {
+        
+        DispatchQueue.main.async {
+            self.viewController.stopLoading()
+            self.viewController.showLaunchText(text)
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 3) {
+                self.viewController.showHomeScreen()
+            }
+        }
     }
 }
 

@@ -34,12 +34,17 @@ extension SplashInteractor: SplashInteractorProtocol {
     func checkNetworkState() {
         
         if !networkService.isInternetAvailable() {
-            presenter.showNetworkError()
+            self.presenter.showNetworkError()
         }
     }
     
     func fetchLaunchText() {
         
-//        firebaseService
+        let key = "loodos_text"
+        firebaseService.fetchRemoteConfigValue(key: key) { (value) in
+            self.presenter.showLaunchText(value.stringValue)
+        } failure: { (error) in
+            self.presenter.handleAndShowError(errorModel: error)
+        }
     }
 }

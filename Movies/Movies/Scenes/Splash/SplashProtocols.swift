@@ -13,6 +13,8 @@ import UIKit
 
 protocol SplashViewControllerProtocol: BaseViewControllerProtocol {
     
+    func showLaunchText(_ text: String?)
+    func showHomeScreen()
 }
 
 // MARK: - Presenter
@@ -26,6 +28,7 @@ protocol SplashPresenterViewProtocol: BasePresenterViewProtocol {
 protocol SplashPresenterInteractorProtocol: BasePresenterInteractorProtocol {
     
     func showNetworkError()
+    func showLaunchText(_ text: String?)
 }
 
 protocol SplashPresenterDelegateProtocol: BasePresenterDelegateProtocol {

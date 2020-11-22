@@ -40,9 +40,7 @@ class NetworkService {
     }()
     
     let sessionManager = SessionManager(configuration: configuration, delegate: SessionDelegate(), serverTrustPolicyManager: MyServerTrustPolicyManager(policies: [:]))
-    
-    var jSessionId: String?
-    
+        
     private init() {
         KingfisherManager.shared.downloader = imageDownloader
     }
@@ -81,61 +79,41 @@ class NetworkService {
                               parameters: [String: Any]? = nil, headers: [String: String]? = nil,
                               success: @escaping SuccessCompletionHandler, failure: @escaping FailureCompletionHandler) {
 
-        if isInternetAvailable() {
-            
-            var headerParams = [String: String]()
-            if let headers = headers {
-                headerParams = headers
-            }
-            
-            if let cookieHeader = jSessionId?.replacingOccurrences(of: ".fusemaftst", with: "").replacingOccurrences(of: ".esmaftst", with: "") {
-                headerParams["Cookie"] = "JSESSIONID=\(cookieHeader)"
-            }
-            let headerParameters = addHeaders(headers: headerParams)
-            print("Url: \(url)\n")
-            do {
-                if try url.asURL().lastPathComponent != "submitPersonalInformation" {
-                    print("Request Parameters: \(String(describing: parameters))\n")
-                }
-            } catch {
-                
-            }
-            print("Header Parameters: \(String(describing: headerParameters))\n")
-            
-            sessionManager.request(url, method: method, parameters: parameters,
-                                   encoding: JSONEncoding.default, headers: headerParameters)
-                .responseJSON(completionHandler: { response in
-                    if let headerFields = response.response?.allHeaderFields as? [String: String],
-                        let URL = response.request?.url {
-                        let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: URL)
-                        if let jSessionIDCookie = cookies.filter({ $0.name == "JSESSIONID" }).first {
-                            self.jSessionId = jSessionIDCookie.value
-                        }
-                    }
-                    print("JSESSIONID: \(String(describing: self.jSessionId))\n")
-                    
-                    print("Response: " + (String(bytes: response.data!, encoding: .utf8) ?? "nil"))
-                    switch response.result {
-                    case .success(let data):
-                        let json = JSON(data)
-                        if json["statusCode"].int == 999 {
-                            self.handleError(json, success: success, failure: failure)
-                            return
-                        }
-                        success(json)
-                    case .failure(let error):
-                        if let urlError = error as? URLError, urlError.code == .notConnectedToInternet {
-                            print("Response Failure Not Connected: \(urlError)\n")
-                            failure(ErrorModel(genericErrorType: GenericErrorType.reachability))
-                        } else {
-                            self.handleHttpError(response.response, success: success, failure: failure)
-                        }
-                    }
-                })
-        } else {
+        if !isInternetAvailable() {
             print("Response Failure Reachability: \n")
             failure(ErrorModel(genericErrorType: GenericErrorType.reachability))
         }
+        
+        var headerParams = [String: String]()
+        
+        if let headers = headers {
+            headerParams = headers
+        }
+        
+        let headerParameters = addHeaders(headers: headerParams)
+        
+        print("Url: \(url)\n")
+        
+        print("Header Parameters: \(String(describing: headerParameters))\n")
+        
+        sessionManager.request(url, method: method, parameters: parameters,
+                               encoding: JSONEncoding.default, headers: headerParameters)
+            .responseJSON(completionHandler: { response in
+                
+                print("Response: " + (String(bytes: response.data!, encoding: .utf8) ?? "nil"))
+                switch response.result {
+                case .success(let data):
+                    let json = JSON(data)
+                    success(json)
+                case .failure(let error):
+                    if let urlError = error as? URLError, urlError.code == .notConnectedToInternet {
+                        print("Response Failure Not Connected: \(urlError)\n")
+                        failure(ErrorModel(genericErrorType: GenericErrorType.reachability))
+                    } else {
+                        self.handleHttpError(response.response, success: success, failure: failure)
+                    }
+                }
+            })
     }
     
     // MARK: - Utils
@@ -190,6 +168,4 @@ class NetworkService {
     static func defaultHeaders() -> [String: String]? {
         return ["Content-Type": "application/json"]
     }
-    
-    
 }

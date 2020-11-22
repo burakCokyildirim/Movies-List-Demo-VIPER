@@ -25,7 +25,7 @@ class SplashViewController: BaseViewController {
         super.viewDidLoad()
         
         presenter.checkNetworkState()
-//        presenter.getLaunchText()
+        presenter.getLaunchText()
     }
     
     // MARK: - Configure
@@ -47,4 +47,12 @@ class SplashViewController: BaseViewController {
 
 extension SplashViewController: SplashViewControllerProtocol {
     
+    func showLaunchText(_ text: String?) {
+        
+        launchText.text = text
+    }
+    
+    func showHomeScreen() {
+        HomeWireframe().show(transitionType: .root)
+    }
 }

@@ -25,7 +25,7 @@ class BaseViewController: UIViewController, NVActivityIndicatorViewable {
     lazy var loading: NVActivityIndicatorView? = {
         guard let window = self.keyWindow else { return nil }
         
-        let loading = NVActivityIndicatorView(frame: CGRect.zero, type: .ballPulseSync, color: .blueGrey, padding: 20)
+        let loading = NVActivityIndicatorView(frame: CGRect.zero, type: .ballPulseSync, color: .systemBlue, padding: 20)
         window.addSubview(loading)
         loading.translatesAutoresizingMaskIntoConstraints = false
         loading.centerXAnchor.constraint(equalTo: window.centerXAnchor).isActive = true

@@ -1,0 +1,25 @@
+/* 
+  Localizable.strings
+  Movies
+
+  Created by Burak Çokyıldırım on 22.11.2020.
+  
+*/
+
+"home_view_controller.title" = "Loodos";
+"home_view_controller.searchbar_placeholder" = "Search Movies or Series";
+
+"detail_view_controller.title" = "Movie Detail";
+
+"error_message.has_no_internet" = "Please check your internet connection.";
+"error_message.http_error" = "Service error occurred.";
+"error_message.somethings_wrong" = "An unexpected error has occurred. Please try again later.";
+
+"unknown" = "Unknow";
+"warning" = "Warning";
+"error" = "Error";
+"generic" = "Generic";
+
+"text.type_something" = "Search for something.";
+"text.no_found" = "No matching results were found.";
+"text.keep_typing" = "Keep typing..";

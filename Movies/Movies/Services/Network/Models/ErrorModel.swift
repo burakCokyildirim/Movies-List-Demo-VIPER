@@ -43,7 +43,7 @@ class ErrorModel: BaseModel {
         }
     }
     
-    init(errorCode: String, errorMessage: String, errorType: ErrorType) {
+    init(errorCode: String = "", errorMessage: String, errorType: ErrorType) {
         super.init()
         
         self.errorCode = errorCode
